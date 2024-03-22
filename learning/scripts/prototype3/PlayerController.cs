@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public bool isOnGround = true;
+    public bool gameover = false;
     private Rigidbody playerRb;
     private float jumpForce = 500;
     public float gravity_modifier = 1.0f;
@@ -24,7 +26,16 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
         }
     }
-    private void OnCollisionEnter(){
-        isOnGround = true;
+    private void OnCollisionEnter(Collision collision){
+        if (collision.gameObject.CompareTag("Obstacle")){
+            gameover = true;
+            Debug.Log("Game Over!");
+            Destroy(gameObject);
+        }
+        else{
+            isOnGround = true;
+        }
+
     }
+
 }
