@@ -22,7 +22,7 @@ public class MoveLeft : MonoBehaviour
             }
         }
         else{
-            Destroy(gameObject);
+            // Destroy(gameObject);
         }
  
     }
