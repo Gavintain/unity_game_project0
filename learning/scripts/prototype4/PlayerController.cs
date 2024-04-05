@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float speed = 500f;
+    public int stimulationTimeSecond = 7;
     private Rigidbody playerRb;
     public GameObject focalPoint;
     public GameObject powerUpIndicator;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator PowerUpCountDownRoutine(){
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(stimulationTimeSecond);
         hasPowerUp = false;
         powerUpIndicator.SetActive(false);
     }
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
         if (otherObject.CompareTag("Enemy")&& hasPowerUp){
             Vector3 forceDirection = (otherObject.transform.position - gameObject.transform.position).normalized;
             Rigidbody enemyRb = otherObject.GetComponent<Rigidbody>();
-            float PowerStrength = 1000f;
+            float PowerStrength = 1500f;
             enemyRb.AddForce(forceDirection * PowerStrength * Time.deltaTime, ForceMode.Impulse);
             // Debug.Log("collide with " + otherObject.name + "with PowerUp" + hasPowerUp);
         }
